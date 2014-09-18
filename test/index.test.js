@@ -1,4 +1,4 @@
-var GooglePlaces = require('../lib/google-places'),
+var GoogleLocations = require('../lib/google-places'),
     vows = require('vows'),
     fakeweb = require('node-fakeweb'),
     assert = require('assert');
@@ -33,7 +33,7 @@ fakeweb.registerUri({
 
 vows.describe('URL Generation').addBatch({
   'default url': {
-    topic: new GooglePlaces('fake_key'),
+    topic: new GoogleLocations('fake_key'),
 
     'should have a default url for place search': function(topic) {
       assert.equal(topic._generateUrl({}, 'place', 'search').href, 'https://maps.googleapis.com/maps/api/place/search/json?key=fake_key');
@@ -56,7 +56,7 @@ vows.describe('URL Generation').addBatch({
 vows.describe('Places Search').addBatch({
   'new search': {
     topic: function() {
-      new GooglePlaces('fake_key').search({}, this.callback);
+      new GoogleLocations('fake_key').search({}, this.callback);
     },
 
     'should not have an error': function(err, response){
@@ -76,7 +76,7 @@ vows.describe('Places Search').addBatch({
 vows.describe('Places Autocomplete').addBatch({
   'new autocomplete': {
     topic: function() {
-      new GooglePlaces('fake_key').autocomplete({}, this.callback);
+      new GoogleLocations('fake_key').autocomplete({}, this.callback);
     },
 
     'should not have an error': function(err, response){
@@ -97,7 +97,7 @@ vows.describe('Places Autocomplete').addBatch({
 vows.describe('Place Details').addBatch({
   'new search': {
     topic: function() {
-      new GooglePlaces('fake_key').details({placeid: 'ABC123'}, this.callback);
+      new GoogleLocations('fake_key').details({placeid: 'ABC123'}, this.callback);
     },
     'should get details': function(err, response){
       assert.equal(response.result.rating, 2.5);
@@ -108,7 +108,7 @@ vows.describe('Place Details').addBatch({
 vows.describe('Geocode Address').addBatch({
   'new address lookup': {
     topic: function() {
-      new GooglePlaces('fake_key').geocodeAddress({address: '1600 Amphitheatre Pkwy, Mountain View, CA'}, this.callback);
+      new GoogleLocations('fake_key').geocodeAddress({address: '1600 Amphitheatre Pkwy, Mountain View, CA'}, this.callback);
     },
     'should get latitude': function(err, response){
       assert.equal(response.results[0].geometry.location.lat, 37.42291810);
@@ -125,7 +125,7 @@ vows.describe('Geocode Address').addBatch({
 vows.describe('Reverse Geocode').addBatch({
   'new geocode lookup': {
     topic: function() {
-      new GooglePlaces('fake_key').reverseGeocode({latlng: [40.714224, -73.961452]}, this.callback);
+      new GoogleLocations('fake_key').reverseGeocode({latlng: [40.714224, -73.961452]}, this.callback);
     },
     'should get latitude': function(err, response){
       assert.equal(response.results[0].geometry.location.lat, 40.714232);
