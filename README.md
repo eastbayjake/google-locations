@@ -1,8 +1,9 @@
 [![build status](https://secure.travis-ci.org/eastbayjake/google-locations.png)](http://travis-ci.org/eastbayjake/google-locations)
-# node-google-places
+# google-locations
 
-Google Places lib for [node.js](http://nodejs.org). Search, look up and autocomplete places via the Google Places API. This lib requires that you
-have a Google API key. For more infor on the API check out the [Google Places API Docs](http://code.google.com/apis/maps/documentation/places/)
+Google Places + Google Geocoding API module for [node.js](http://nodejs.org). Supports basic functions on the Google Places API -- search, autocomplete, and details -- as well as geocoding and reverse geocoding capabilities with the Google Geocoding API. This module requires a valid Google API key and enabled access for Google Places and/or Google Geocoding. Check out the [Google Places API docs](http://code.google.com/apis/maps/documentation/places/) or [Google Geocoding API docs](http://code.google.com/apis/maps/documentation/geocode/) for more information.
+
+This is a fork of the [node-google-places](https://www.npmjs.org/package/google-places) module which appears to no longer be actively maintained. Please feel free to submit pull requests for features and additional test coverage!
 
 ## Install
 
@@ -12,20 +13,20 @@ npm install google-locations
 
 ## Usage
 ```js
-var GooglePlaces = require('google-places');
+var GoogleLocations = require('google-locations');
 
-var places = new GooglePlaces('YOUR_API_KEY');
+var locations = new GoogleLocations('YOUR_API_KEY');
 
-places.search({keyword: 'Vermonster'}, function(err, response) {
+locations.search({keyword: 'Google', location: [37.42291810, -122.08542120]}, function(err, response) {
   console.log("search: ", response.results);
 
-  places.details({placeid: response.results[0].place_id}, function(err, response) {
+  locations.details({placeid: response.results[0].place_id}, function(err, response) {
     console.log("search details: ", response.result.website);
     // search details:  http://www.vermonster.com/
   });
 });
 
-places.autocomplete({input: 'Verm', types: "(cities)"}, function(err, response) {
+locations.autocomplete({input: 'Verm', types: "(cities)"}, function(err, response) {
   console.log("autocomplete: ", response.predictions);
 
   var success = function(err, response) {
@@ -37,13 +38,10 @@ places.autocomplete({input: 'Verm', types: "(cities)"}, function(err, response) 
   };
 
   for(var index in response.predictions) {
-    places.details({placeid: response.predictions[index].place_id}, success);
+    locations.details({placeid: response.predictions[index].place_id}, success);
   }
 });
 ```
-
-## Features
-Currently search, autocomplete and details are supported. I hope to add checkin soon.
 
 ## Test
 
