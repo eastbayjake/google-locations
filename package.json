@@ -10,7 +10,7 @@
     "type": "git",
     "url": "http://github.com/eastbayjake/google-locations.git"
   },
-  "dependencies"  : ["underscore"],
+  "dependencies": ["underscore"],
   "devDependencies": ["vows", "node-fakeweb"],
   "main": "./lib/google-places.js"
 }
