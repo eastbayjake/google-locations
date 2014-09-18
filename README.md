@@ -1,4 +1,4 @@
-[![build status](https://secure.travis-ci.org/jpowers/node-google-places.png)](http://travis-ci.org/jpowers/node-google-places)
+[![build status](https://secure.travis-ci.org/eastbayjake/google-locations.png)](http://travis-ci.org/eastbayjake/google-locations)
 # node-google-places
 
 Google Places lib for [node.js](http://nodejs.org). Search, look up and autocomplete places via the Google Places API. This lib requires that you
@@ -7,7 +7,7 @@ have a Google API key. For more infor on the API check out the [Google Places AP
 ## Install
 
 ```
-npm install google-places
+npm install google-locations
 ```
 
 ## Usage
