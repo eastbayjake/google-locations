@@ -1,17 +1,16 @@
 {
-  "name": "google-places",
-  "description": "node.js client for google places API",
-  "version": "0.0.2",
-  "homepage": "http://github.com/jpowers/node-google-places",
-  "author": "Jay Powers <jay@vermonster.com>",
-  "contributors": ["Marcin Wiśniowski <shfx@shfx.pl> (http://shfx.pl)"],
+  "name": "google-locations",
+  "description": "Address searches via Google Geocoding for the Google Places API",
+  "version": "0.0.1",
+  "homepage": "http://github.com/eastbayjake/google-locations",
+  "author": "Jake McGuire <mcguireghs@gmail.com>",
+  "contributors": [],
   "scripts":{"test":"node ./test/index.test.js"},
   "repository": {
     "type": "git",
-    "url": "http://github.com/jpowers/node-google-places.git"
+    "url": "http://github.com/eastbayjake/google-locations.git"
   },
-  "dependencies"  : ["underscore", "url"],
+  "dependencies"  : ["underscore"],
   "devDependencies": ["vows", "node-fakeweb"],
   "main": "./lib/google-places.js"
 }
-
