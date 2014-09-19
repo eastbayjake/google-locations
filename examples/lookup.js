@@ -1,9 +1,9 @@
 var dotenv = require('dotenv');
 dotenv.load();
 
-var GooglePlaces = require('../lib/google-places');
+var GoogleLocations = require('../lib/google-locations');
 
-var places = new GooglePlaces(process.env.GOOGLE_API_KEY);
+var places = new GoogleLocations(process.env.GOOGLE_API_KEY);
 
 places.search({keyword: 'Vermonster'}, function(err, response) {
   if(err) { console.log(err); return; }
