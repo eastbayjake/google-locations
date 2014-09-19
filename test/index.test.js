@@ -5,10 +5,15 @@ var GoogleLocations = require('../lib/google-places'),
 
 fakeweb.allowNetConnect = false;
 
-// fake the search
+// fake the search - basic example
 fakeweb.registerUri({
   uri: 'https://maps.googleapis.com/maps/api/place/search/json?location=37.4229181%2C-122.0854212&radius=10&language=en&rankby=prominence&key=fake_key',
-  body: '{"results" : [{"name": "Google", "id":"1"}], "status" : "OK"}'
+  body: '{"results" : [{"name": "Google", "place_id":"ABC123"}], "status" : "OK"}'
+});
+// fake the search -- by address example
+fakeweb.registerUri({
+  uri: 'https://maps.googleapis.com/maps/api/place/search/json?location=37.4229181%2C-122.0854212&rankby=distance&radius=&language=en&key=fake_key',
+  body: '{"results" : [{"name": "Google", "place_id":"ABC123"}], "status" : "OK"}'
 });
 // fake the autocomplete
 fakeweb.registerUri({
@@ -18,7 +23,7 @@ fakeweb.registerUri({
 //fake the details
 fakeweb.registerUri({
   uri: 'https://maps.googleapis.com/maps/api/place/details/json?placeid=ABC123&language=en&key=fake_key',
-  body: '{"result" : {"rating": 2.5}, "status" : "OK"}'
+  body: '{"result" : {"name": "Google", "rating": 2.5}, "status" : "OK"}'
 });
 //fake the geocoding
 fakeweb.registerUri({
@@ -135,6 +140,17 @@ vows.describe('Reverse Geocode').addBatch({
     },
     'should get formatted address': function(err, response){
       assert.equal(response.results[0].formatted_address, '277 Bedford Avenue, Brooklyn, NY 11211, USA');
+    }
+  }
+}).export(module);
+
+vows.describe('Place Details via Address Query').addBatch({
+  'get details from address/name query': {
+    topic: function(){
+      new GoogleLocations('fake_key').findPlaceDetailsWithAddress({address: '1600 Amphitheatre Pkwy, Mountain View, CA', name: 'Google'}, this.callback);
+    },
+    'should get a location': function(err, response){
+      assert.equal(response.result.name, 'Google');
     }
   }
 }).export(module);
