@@ -12,5 +12,5 @@
   },
   "dependencies": ["underscore"],
   "devDependencies": ["vows", "node-fakeweb"],
-  "main": "./lib/google-places.js"
+  "main": "./lib/google-locations.js"
 }
