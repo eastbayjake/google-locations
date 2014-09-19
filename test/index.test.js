@@ -1,4 +1,4 @@
-var GoogleLocations = require('../lib/google-places'),
+var GoogleLocations = require('../lib/google-locations'),
     vows = require('vows'),
     fakeweb = require('node-fakeweb'),
     assert = require('assert');
