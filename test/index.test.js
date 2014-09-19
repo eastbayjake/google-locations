@@ -7,12 +7,12 @@ fakeweb.allowNetConnect = false;
 
 // fake the search - basic example
 fakeweb.registerUri({
-  uri: 'https://maps.googleapis.com/maps/api/place/search/json?location=37.4229181%2C-122.0854212&radius=10&language=en&rankby=prominence&key=fake_key',
+  uri: 'https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=37.4229181%2C-122.0854212&radius=10&language=en&rankby=prominence&key=fake_key',
   body: '{"results" : [{"name": "Google", "place_id":"ABC123"}], "status" : "OK"}'
 });
 // fake the search -- by address example
 fakeweb.registerUri({
-  uri: 'https://maps.googleapis.com/maps/api/place/search/json?location=37.4229181%2C-122.0854212&rankby=distance&radius=&language=en&key=fake_key',
+  uri: 'https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=37.4229181%2C-122.0854212&rankby=distance&radius=&language=en&key=fake_key',
   body: '{"results" : [{"name": "Google", "place_id":"ABC123"}], "status" : "OK"}'
 });
 // fake the autocomplete
