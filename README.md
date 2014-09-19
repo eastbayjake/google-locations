@@ -56,6 +56,7 @@ To test simply install development dependencies and run:
 The MIT License (MIT)
 
 Copyright (C) 2012 Vermonster LLC
+
 Copyright (C) 2014 Jake McGuire
 
 Permission is hereby granted, free of charge, to any person obtaining a copy of
