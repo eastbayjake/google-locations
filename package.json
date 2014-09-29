@@ -28,6 +28,7 @@
     "bitwise": true,
     "nonew": true,
     "browser": true,
-    "devel": true
+    "devel": true,
+    "globals": ["module", "require"],
   }
 }
