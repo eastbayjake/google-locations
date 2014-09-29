@@ -12,5 +12,22 @@
   },
   "dependencies": ["underscore"],
   "devDependencies": ["vows", "node-fakeweb"],
-  "main": "./lib/google-locations.js"
+  "main": "./lib/google-locations.js",
+  "jshintConfig": {
+    "complex": true,
+    "unused": true,
+    "undef": true,
+    "eqnull": true,
+    "debug": true,
+    "forin": true,
+    "noarg": true,
+    "boss": true,
+    "loopfunc": true,
+    "evil": true,
+    "laxbreak": true,
+    "bitwise": true,
+    "nonew": true,
+    "browser": true,
+    "devel": true
+  }
 }
