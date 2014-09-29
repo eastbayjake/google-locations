@@ -1,7 +1,8 @@
 var GoogleLocations = require('../lib/google-locations'),
     vows = require('vows'),
     fakeweb = require('node-fakeweb'),
-    assert = require('assert');
+    assert = require('assert'),
+    util = require('util');
 
 fakeweb.allowNetConnect = false;
 
@@ -13,7 +14,7 @@ fakeweb.registerUri({
 // fake the search -- by address example
 fakeweb.registerUri({
   uri: 'https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=37.4229181%2C-122.0854212&rankby=distance&radius=&name=A&language=en&key=fake_key',
-  body: '{"results" : [{"name": "Google", "place_id":"ABC123"}], "status" : "OK"}'
+  body: '{"results" : [{"name": "Google", "place_id":"ABC123"}, {"name": "Gooey Cookie Factory", "place_id":"DEF456"}], "status" : "OK"}'
 });
 // fake the autocomplete
 fakeweb.registerUri({
@@ -23,7 +24,11 @@ fakeweb.registerUri({
 //fake the details
 fakeweb.registerUri({
   uri: 'https://maps.googleapis.com/maps/api/place/details/json?placeid=ABC123&language=en&key=fake_key',
-  body: '{"result" : {"name": "Google", "rating": 2.5}, "status" : "OK"}'
+  body: '{"result" : {"name": "Google", "rating": 3.5}, "status" : "OK"}'
+});
+fakeweb.registerUri({
+  uri: 'https://maps.googleapis.com/maps/api/place/details/json?placeid=DEF456&language=en&key=fake_key',
+  body: '{"result" : {"name": "Gooey Cookie Factory", "rating": 4.0}, "status" : "OK"}'
 });
 //fake the geocoding
 fakeweb.registerUri({
@@ -105,7 +110,7 @@ vows.describe('Place Details').addBatch({
       new GoogleLocations('fake_key').details({placeid: 'ABC123'}, this.callback);
     },
     'should get details': function(err, response){
-      assert.equal(response.result.rating, 2.5);
+      assert.equal(response.result.rating, 3.5);
     }
   }
 }).export(module);
@@ -150,7 +155,18 @@ vows.describe('Place Details via Address Query').addBatch({
       new GoogleLocations('fake_key').findPlaceDetailsWithAddress({address: '1600 Amphitheatre Pkwy, Mountain View, CA', name: 'Google'}, this.callback);
     },
     'should get a location': function(err, response){
-      assert.equal(response.result.name, 'Google');
+      assert.equal(response.details[0].result.name, 'Google');
+    },
+    'should default to one result without maxResults specified': function(err, response){
+      assert.equal(response.details.length, 1);
+    }
+  },
+  'list multiple results if specified': {
+    topic: function(){
+      new GoogleLocations('fake_key').findPlaceDetailsWithAddress({address: '1600 Amphitheatre Pkwy, Mountain View, CA', name: 'Google', maxResults: 2}, this.callback);
+    },
+    'should contain two results': function(err, response){
+      assert.equal(response.details.length, 2);
     }
   }
 }).export(module);

@@ -43,6 +43,17 @@ locations.autocomplete({input: 'Verm', types: "(cities)"}, function(err, respons
     locations.details({placeid: response.predictions[index].place_id}, success);
   }
 });
+
+locations.findPlaceDetailsWithAddress({address: '1600 Amphitheatre Pkwy, Mountain View, CA', name: 'Google', maxResults: 2}, function(err, response){
+  for (var index in response.details) {
+    console.log("Potential Match: " + response.details[index].name);
+    // Potential Match: Google
+    // Potential Match: Gooey Cookie Factory
+  }
+  for (var index in response.errors) {
+    console.log("Error looking up place details: ", response.errors[index]);
+  }
+});
 ```
 
 ## Test
