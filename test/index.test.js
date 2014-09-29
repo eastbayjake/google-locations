@@ -13,8 +13,12 @@ fakeweb.registerUri({
 });
 // fake the search -- by address example
 fakeweb.registerUri({
-  uri: 'https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=37.4229181%2C-122.0854212&rankby=distance&radius=&name=A&language=en&key=fake_key',
+  uri: 'https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=37.4229181%2C-122.0854212&rankby=prominence&radius=250&name=A&language=en&key=fake_key',
   body: '{"results" : [{"name": "Google", "place_id":"ABC123"}, {"name": "Gooey Cookie Factory", "place_id":"DEF456"}], "status" : "OK"}'
+});
+fakeweb.registerUri({
+  uri: 'https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=33.5291106%2C-90.226939&rankby=prominence&radius=250&name=A&language=en&key=fake_key',
+  body: '{"html_attributions": [], "results": [], "status": "ZERO_RESULTS" }'
 });
 // fake the autocomplete
 fakeweb.registerUri({
@@ -34,6 +38,10 @@ fakeweb.registerUri({
 fakeweb.registerUri({
   uri: 'https://maps.googleapis.com/maps/api/geocode/json?address=1600%2BAmphitheatre%2BPkwy%2C%2BMountain%2BView%2C%2BCA&language=en&key=fake_key',
   body: '{"results" : [{"address_components" : [], "formatted_address" : "1600 Amphitheatre Pkwy, Mountain View, CA 94043, USA", "geometry" : {"location" : {"lat" : 37.42291810, "lng" : -122.08542120}}}], "status" : "OK"}'
+});
+fakeweb.registerUri({
+  uri: 'https://maps.googleapis.com/maps/api/geocode/json?address=2202%2BUS%2B82%2C%2BGreenwood%2C%2BMS&language=en&key=fake_key',
+  body: '{"results" : [{"address_components" : [], "formatted_address" : "2202 US 82, Greenwood, MS 38930", "geometry" : {"location" : {"lat" : 33.5291106, "lng" : -90.226939}}}], "status" : "OK"}'
 });
 //fake the reverse geocoding
 fakeweb.registerUri({
@@ -159,7 +167,7 @@ vows.describe('Place Details via Address Query').addBatch({
     },
     'should default to one result without maxResults specified': function(err, response){
       assert.equal(response.details.length, 1);
-    }
+    },
   },
   'list multiple results if specified': {
     topic: function(){
@@ -167,6 +175,14 @@ vows.describe('Place Details via Address Query').addBatch({
     },
     'should contain two results': function(err, response){
       assert.equal(response.details.length, 2);
+    }
+  },
+  'null results': {
+    topic: function(){
+      new GoogleLocations('fake_key').findPlaceDetailsWithAddress({address: '2202 US 82, Greenwood, MS', name: 'Walmart', maxResults: 5}, this.callback);
+    },
+    'should return an empty array if there are no results': function(err, response){
+      assert.equal(response.details.length, 0);
     }
   }
 }).export(module);
