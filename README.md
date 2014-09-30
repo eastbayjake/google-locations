@@ -1,7 +1,7 @@
 [![build status](https://secure.travis-ci.org/eastbayjake/google-locations.png)](http://travis-ci.org/eastbayjake/google-locations)
 # google-locations
 
-Google Places + Google Geocoding API module for [node.js](http://nodejs.org). Supports basic functions on the Google Places API -- search, autocomplete, and details -- as well as geocoding and reverse geocoding capabilities with the Google Geocoding API. Under current development: enter an address and search term (like a business name) and find the closest matching Place Detail by turning the address into a geocode, querying for places near that geocode matching the search term, then looking up the details for the most relevant match in that set.
+Google Places + Google Geocoding API module for [node.js](http://nodejs.org). Supports basic functions on the Google Places API -- search, autocomplete, and details -- as well as geocoding and reverse geocoding capabilities with the Google Geocoding API. It also contains a convenience method, findPlaceDetailsWithAddress, that allows users to retrieve Place Details with an address search. (The Places API makes users search for places near a latitude/longitude point, so findPlaceDetailsWithAddress handles geocoding an address, finding places near those coordinates, then returning details up to a user-specified limit.)
 
 This module requires a valid Google API key and enabled access for Google Places and/or Google Geocoding. Check out the [Google Places API docs](http://code.google.com/apis/maps/documentation/places/) or [Google Geocoding API docs](http://code.google.com/apis/maps/documentation/geocode/) for more information.
 
@@ -44,7 +44,8 @@ locations.autocomplete({input: 'Verm', types: "(cities)"}, function(err, respons
   }
 });
 
-locations.findPlaceDetailsWithAddress({address: '1600 Amphitheatre Pkwy, Mountain View, CA', name: 'Google', maxResults: 2}, function(err, response){
+/* The only mandatory parameter is address. If rankby is 'distance', name must be specified. If rankby is 'prominence', radius must be specified. If rankby is not specified, it will default to 'distance' and therefore name will be required. The most reliable practice is to specify both an address and name. If maxResults isn't specified it will default to 1.*/
+locations.findPlaceDetailsWithAddress({address: '1600 Amphitheatre Pkwy, Mountain View, CA', name: 'Goo', maxResults: 2, rankby: "prominence", radius: 5000}, function(err, response){
   for (var index in response.details) {
     console.log("Potential Match: " + response.details[index].name);
     // Potential Match: Google
@@ -60,7 +61,7 @@ locations.findPlaceDetailsWithAddress({address: '1600 Amphitheatre Pkwy, Mountai
 
 To test simply install development dependencies and run:
 
-`vows test/* --spec`
+```vows test/* --spec```
 
 ## License
 
