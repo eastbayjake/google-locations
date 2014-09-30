@@ -6,7 +6,12 @@ var GoogleLocations = require('../lib/google-locations'),
 
 fakeweb.allowNetConnect = false;
 
-// fake the search - basic example
+// fake the search -- basic example by distance
+fakeweb.registerUri({
+  uri: 'https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=37.4229181%2C-122.0854212&rankby=distance&name=Goo&radius=&language=en&key=fake_key',
+  body: '{"results" : [{"name": "Google", "place_id":"ABC123"},{"name": "Gooey Cookie Factory", "place_id":"DEF456"},{"name": "Goorman Shoes", "place_id":"GHI789"}], "status" : "OK"}'
+});
+// fake the search -- basic example by prominence + radius
 fakeweb.registerUri({
   uri: 'https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=37.4229181%2C-122.0854212&radius=10&name=A&language=en&rankby=prominence&key=fake_key',
   body: '{"results" : [{"name": "Google", "place_id":"ABC123"}], "status" : "OK"}'
@@ -16,8 +21,9 @@ fakeweb.registerUri({
   uri: 'https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=37.4229181%2C-122.0854212&rankby=prominence&radius=250&name=A&language=en&key=fake_key',
   body: '{"results" : [{"name": "Google", "place_id":"ABC123"}, {"name": "Gooey Cookie Factory", "place_id":"DEF456"}], "status" : "OK"}'
 });
+// fake the search -- no results
 fakeweb.registerUri({
-  uri: 'https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=33.5291106%2C-90.226939&rankby=prominence&radius=250&name=A&language=en&key=fake_key',
+  uri: 'https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=33.5291106%2C-90.226939&rankby=distance&name=Walmart&radius=&language=en&key=fake_key',
   body: '{"html_attributions": [], "results": [], "status": "ZERO_RESULTS" }'
 });
 // fake the autocomplete
@@ -33,6 +39,10 @@ fakeweb.registerUri({
 fakeweb.registerUri({
   uri: 'https://maps.googleapis.com/maps/api/place/details/json?placeid=DEF456&language=en&key=fake_key',
   body: '{"result" : {"name": "Gooey Cookie Factory", "rating": 4.0}, "status" : "OK"}'
+});
+fakeweb.registerUri({
+  uri: 'https://maps.googleapis.com/maps/api/place/details/json?placeid=GHI789&language=en&key=fake_key',
+  body: '{"result" : {"name": "Goorman Shoes", "rating": 2.5}, "status" : "OK"}'
 });
 //fake the geocoding
 fakeweb.registerUri({
@@ -160,7 +170,7 @@ vows.describe('Reverse Geocode').addBatch({
 vows.describe('Place Details via Address Query').addBatch({
   'get details from address/name query': {
     topic: function(){
-      new GoogleLocations('fake_key').findPlaceDetailsWithAddress({address: '1600 Amphitheatre Pkwy, Mountain View, CA', name: 'Google'}, this.callback);
+      new GoogleLocations('fake_key').findPlaceDetailsWithAddress({address: '1600 Amphitheatre Pkwy, Mountain View, CA', name: 'Goo'}, this.callback);
     },
     'should get a location': function(err, response){
       assert.equal(response.details[0].result.name, 'Google');
@@ -171,7 +181,7 @@ vows.describe('Place Details via Address Query').addBatch({
   },
   'list multiple results if specified': {
     topic: function(){
-      new GoogleLocations('fake_key').findPlaceDetailsWithAddress({address: '1600 Amphitheatre Pkwy, Mountain View, CA', name: 'Google', maxResults: 2}, this.callback);
+      new GoogleLocations('fake_key').findPlaceDetailsWithAddress({address: '1600 Amphitheatre Pkwy, Mountain View, CA', name: 'Goo', maxResults: 2}, this.callback);
     },
     'should contain two results': function(err, response){
       assert.equal(response.details.length, 2);
