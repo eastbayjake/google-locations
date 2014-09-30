@@ -1,7 +1,7 @@
 {
   "name": "google-locations",
   "description": "Address searches via Google Geocoding for the Google Places API",
-  "version": "0.0.5",
+  "version": "0.1.0",
   "homepage": "http://github.com/eastbayjake/google-locations",
   "author": "Jake McGuire <mcguireghs@gmail.com>",
   "contributors": [],
