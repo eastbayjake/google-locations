@@ -6,6 +6,7 @@
   "author": "Jake McGuire <mcguireghs@gmail.com>",
   "contributors": [],
   "keywords": ["Google Places", "Places API", "Google Geocoding", "Geocoding API"],
+  "license": "MIT",
   "scripts":{"test":"node ./test/index.test.js"},
   "repository": {
     "type": "git",
