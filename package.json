@@ -5,6 +5,7 @@
   "homepage": "http://github.com/eastbayjake/google-locations",
   "author": "Jake McGuire <mcguireghs@gmail.com>",
   "contributors": [],
+  "keywords": ["Google Places", "Places API", "Google Geocoding", "Geocoding API"],
   "scripts":{"test":"node ./test/index.test.js"},
   "repository": {
     "type": "git",
