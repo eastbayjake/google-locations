@@ -45,7 +45,7 @@ locations.autocomplete({input: 'Verm', types: "(cities)"}, function(err, respons
 });
 
 /* The only mandatory parameter is address. If rankby is 'distance', name must be specified. If rankby is 'prominence', radius must be specified. If rankby is not specified, it will default to 'distance' and therefore name will be required. The most reliable practice is to specify both an address and name. If maxResults isn't specified it will default to 1.*/
-locations.findPlaceDetailsWithAddress({address: '1600 Amphitheatre Pkwy, Mountain View, CA', name: 'Goo', maxResults: 2, rankby: "prominence", radius: 5000}, function(err, response){
+locations.searchByAddress({address: '1600 Amphitheatre Pkwy, Mountain View, CA', name: 'Goo', maxResults: 2, rankby: "prominence", radius: 5000}, function(err, response){
   for (var index in response.details) {
     console.log("Potential Match: " + response.details[index].name);
     // Potential Match: Google
@@ -54,6 +54,11 @@ locations.findPlaceDetailsWithAddress({address: '1600 Amphitheatre Pkwy, Mountai
   for (var index in response.errors) {
     console.log("Error looking up place details: ", response.errors[index]);
   }
+});
+
+/* This method lets you query for Google Place details by phone number. 'phone' is a required parameter. If 'maxResults' isn't specified it will default to 1, only returning details about the top result in search. NOTE: This method uses the Google Places API's textsearch endpoint, so each request counts as 10 requests toward your daily quota!*/
+locations.searchByPhone({phone: "(650) 253-0000"}, maxResults: 2, function(err, response){
+  // Returns up to 2 matches for this phone number
 });
 ```
 
