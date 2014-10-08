@@ -77,28 +77,6 @@ fakeweb.registerUri({
   body: '{"results" : [{"address_components" : [], "formatted_address" : "277 Bedford Avenue, Brooklyn, NY 11211, USA", "geometry" : {"location" : { "lat" : 40.714232, "lng" : -73.9612889}}}], "status": "OK"}'
 });
 
-vows.describe('URL Generation').addBatch({
-  'default url': {
-    topic: new GoogleLocations('fake_key'),
-
-    'should have a default url for place search': function(topic) {
-      assert.equal(topic._generateUrl({}, 'place', 'search').href, 'https://maps.googleapis.com/maps/api/place/search/json?key=fake_key');
-    },
-
-    'should have a default url for place autocomplete': function(topic) {
-      assert.equal(topic._generateUrl({}, 'place', 'autocomplete').href, 'https://maps.googleapis.com/maps/api/place/autocomplete/json?key=fake_key');
-    },
-
-    'should have a default url for geocode address lookup': function(topic) {
-      assert.equal(topic._generateUrl({}, 'geocode', null).href, 'https://maps.googleapis.com/maps/api/geocode/json?key=fake_key');
-    },
-
-    'should have my key as a query param': function(topic) {
-      assert.equal(topic._generateUrl({key: 'fake_key'}, 'search').query, 'key=fake_key');
-    }
-  }
-}).export(module);
-
 vows.describe('Places Search').addBatch({
   'new search': {
     topic: function() {
