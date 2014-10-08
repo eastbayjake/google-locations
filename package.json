@@ -1,11 +1,11 @@
 {
   "name": "google-locations",
-  "description": "Address searches via Google Geocoding for the Google Places API",
-  "version": "0.1.0",
+  "description": "Google Places API for Node.js, with convenience methods to search by address or phone number",
+  "version": "0.1.1",
   "homepage": "http://github.com/eastbayjake/google-locations",
   "author": "Jake McGuire <mcguireghs@gmail.com>",
   "contributors": [],
-  "keywords": ["Google Places", "Places API", "Google Geocoding", "Geocoding API"],
+  "keywords": ["Google Places", "Places API", "Google Geocoding", "Geocoding API", "search by address", "search by phone"],
   "license": "MIT",
   "scripts":{"test":"vows test/* --spec"},
   "repository": {
