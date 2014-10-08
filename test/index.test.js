@@ -218,11 +218,11 @@ vows.describe('Search by Address').addBatch({
       assert.equal(response.details.length, 1);
     },
   },
-  'list multiple results if specified': {
+  'multiple results': {
     topic: function(){
       new GoogleLocations('fake_key').searchByAddress({address: '1600 Amphitheatre Pkwy, Mountain View, CA', name: 'Goo', maxResults: 2}, this.callback);
     },
-    'should contain two results': function(err, response){
+    'should list up to the number specified in maxResults': function(err, response){
       assert.equal(response.details.length, 2);
     }
   },
@@ -241,8 +241,19 @@ vows.describe('Search by Phone').addBatch({
     topic: function(){
       new GoogleLocations('fake_key').searchByPhone({phone: '(650) 253-0000'}, this.callback);
     },
-    'should get a location': function(err, response){
+    'should get a location that matches the provided phone number': function(err, response){
       assert.equal(response.details[0].result.formatted_phone_number, "(650) 253-0000");
+    },
+    'should default to one result without maxResults specified': function(err, response){
+      assert.equal(response.details.length, 1);
+    }
+  },
+  'multiple results': {
+    topic: function(){
+      new GoogleLocations('fake_key').searchByPhone({phone: '(650) 253-0000', maxResults: 2}, this.callback);
+    },
+    'should list up to the number specified in maxResults': function(err, response){
+      assert.equal(response.details.length, 2);
     }
   }
 }).export(module);
