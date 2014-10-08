@@ -26,6 +26,15 @@ fakeweb.registerUri({
   uri: 'https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=33.5291106%2C-90.226939&rankby=distance&name=Walmart&radius=&language=en&key=fake_key',
   body: '{"html_attributions": [], "results": [], "status": "ZERO_RESULTS" }'
 });
+// fake the text search -- Google in Mountain View, CA
+fakeweb.registerUri({
+  uri: 'https://maps.googleapis.com/maps/api/place/textsearch/json?query=Google%20near%20Mountain%20View%2C%20CA&key=fake_key',
+  body: JSON.stringify({"html_attributions" : [], "results" : [{"formatted_address" : "1600 Amphitheatre Pkwy, Mountain View, CA 94043, United States", "geometry" : {"location" : {"lat" : 37.422, "lng" : -122.084058 } }, "icon" : "http://maps.gstatic.com/mapfiles/place_api/icons/generic_business-71.png", "id" : "3a936e96ddcb18b4fa8a2974ebc8876c3108fef2", "name" : "Googleplex", "photos" : [{"height" : 362, "html_attributions" : [], "photo_reference" : "CqQBnQAAACrzt8KRfXeyLDzN6HPye4dEYyH6Frnd-0WQUk81jBb8LzzvQW0HpBuG6SH9JkyTQ7kyId90ZMcrDHoOXny6QO69QTLWqS-it0OGd2KQKS0XR3Sqlv4iiYO2sfLIC177HiJ2bgB_kncbTqScaMSieZOT5Yjdcgotd5-984XP0uphJyXMXuzk8y97ATpreVMYSa83i0ye0Jk3umeY2VcAxE8SEIcOCsK5nF_x8WJj_zZnug4aFM5MGYQNDCqV-9yKZEZZ_EYpc_F-", "width" : 362 } ], "place_id" : "ChIJj61dQgK6j4AR4GeTYWZsKWw", "rating" : 4.3, "reference" : "CnRrAAAAiMV6plnUyDjA4svDGC4vtsleamSG8YUkdacfty4LO1izjwvDhmBewfdRB2S49CHXffNXPYnmsWiUR3kUhLPFlJgAXPoGUVuTIwf1-D8pXgu8VzChoG0FHMLqn0O2qtq17ET03um2OJDs8Ql2XSU9DxIQ6C905MW2ma-jYF7GjfYM3RoUliLUV6ZkGJAkA18VCsBJNQaNy6s", "types" : [ "establishment" ] }, {"formatted_address" : "1625 Charleston Rd, Mountain View, CA 94043, United States", "geometry" : {"location" : {"lat" : 37.420068, "lng" : -122.084157 } }, "icon" : "http://maps.gstatic.com/mapfiles/place_api/icons/generic_business-71.png", "id" : "a42ab417bb867ea8b2685989fd20e214920beb73", "name" : "Google", "opening_hours" : {"open_now" : false }, "photos" : [{"height" : 853, "html_attributions" : [], "photo_reference" : "CnRnAAAAM39qg_oTPeO6BmXj1GSEPCQEtUCQDX6hw8zD1vObVEfyfMbhvyYd3lakChI6LgAKf7x4_c5ovs-OHRAucr5xqcKx-5XQFOLCfQiKzdM1gdf78u5Hz2AIDoZpSWVLmkOPImw5O43Pfh3YaVpMb-hVAhIQObLac5IE1MAfFWNJdIkrRhoUNE4Kf5R5x72dcPNz1pknyiLXlbA", "width" : 1280 } ], "place_id" : "ChIJs1NtHP-5j4ARe0BWrv6DESU", "rating" : 4.6, "reference" : "CnRnAAAAz1oNAfX1WnlIKHGzcP0C2M-yZVE-UDuR1oHqy_P_Lq1BNR7M3XVl590SFrXEuxnmsn16f0hF0Nv3JiE_RwC-aWC_1oyd5Pae1WFp99m2g4lW747mS38l-aCBGywFPnt9yd-4P0TSmuCgeJSyP_PnThIQYBLa4qEKzoqC_oCs3PJCXhoUAidEpd4U56zJgJ3BZShC4I6dpXc", "types" : [ "establishment" ] } ], "status" : "OK"}) });
+// fake the text search -- Gap in Los Angeles
+fakeweb.registerUri({
+  uri: 'https://maps.googleapis.com/maps/api/place/textsearch/json?query=gap%20in%20los%20angeles%20with%20phone%20number%20(323)%20462-6124&key=fake_key',
+  body: '{"html_attributions" : [], "results" : [{"formatted_address" : "6801 Hollywood Blvd, Hollywood, CA 90028, United States", "geometry" : {"location" : {"lat" : 34.102023, "lng" : -118.338945 } }, "icon" : "http://maps.gstatic.com/mapfiles/place_api/icons/shopping-71.png", "id" : "a42c4ae9c44c7c59e5e29854a0e468a2ccceec72", "name" : "Gap", "opening_hours" : {"open_now" : true }, "photos" : [{"height" : 320, "html_attributions" : [], "photo_reference" : "CnRqAAAAw3bpYDzuY8vfPEyFki5-M5w-bOq93RLi4CNr9YlH5GNv1mH5rWrymCVyXhTyIMZCv-qGnQ_hS7mTflti7d1z33K7w6YVNzbaWFTc_Rx8CdGukhnX_dL67cCfU_mw-cXWloGZA-D8PyYCG91r6h7vIRIQgDw9fNnVFiBf1lT6REjCwRoUtjxZ8d_FPBaqHGCNIbw4tG-5goA", "width" : 320 } ], "place_id" : "ChIJswRilCO_woARhnNq2d1meQk", "price_level" : 2, "reference" : "CnRkAAAAwuQkQV_Lh_E-fO3J_1EIiTlW5b_QX_fEW57SJ7V5M-sQEa1GxuGpZJ3xFn60iq0i7Ei2t7mX9ni6iyFRf7oWdCdqt8oxYfg0wo8y_i3wUu08w7SPr8uqjYPS-P7T9gjZVl-s2RTNBaKuJuD38C6oNBIQejdSew4OHmdE5skg1nqsOhoURNqZS2rQ5gZ20aGbhJuatxiYm8o", "types" : [ "clothing_store", "store", "establishment" ] } ], "status" : "OK"}'
+});
 // fake the autocomplete
 fakeweb.registerUri({
   uri: 'https://maps.googleapis.com/maps/api/place/autocomplete/json?language=en&key=fake_key',
@@ -98,6 +107,27 @@ vows.describe('Places Search').addBatch({
     'should include location description': function(err, response){
       assert.equal(response.results[0].name, 'Google');
     }
+  }
+}).export(module);
+
+vows.describe('Places Text Search').addBatch({
+  'new textsearch': {
+    topic: function() {
+      new GoogleLocations('fake_key').textsearch({query: 'Google near Mountain View, CA'}, this.callback);
+    },
+
+    'should not have an error': function(err, response){
+      assert.isNull(err);
+    },
+
+    'should be status OK': function(err, response){
+      assert.equal(response.status, 'OK');
+    },
+
+    'should include formatted address': function(err, response){
+      assert.equal(response.results[0].formatted_address, '1600 Amphitheatre Pkwy, Mountain View, CA 94043, United States');
+    }
+
   }
 }).export(module);
 

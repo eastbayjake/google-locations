@@ -7,7 +7,7 @@
   "contributors": [],
   "keywords": ["Google Places", "Places API", "Google Geocoding", "Geocoding API"],
   "license": "MIT",
-  "scripts":{"test":"node ./test/index.test.js"},
+  "scripts":{"test":"vows test/* --spec"},
   "repository": {
     "type": "git",
     "url": "http://github.com/eastbayjake/google-locations.git"
