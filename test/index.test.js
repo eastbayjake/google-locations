@@ -13,12 +13,12 @@ fakeweb.registerUri({
 });
 // fake the search -- basic example by prominence + radius
 fakeweb.registerUri({
-  uri: 'https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=37.4229181%2C-122.0854212&radius=10&name=A&language=en&rankby=prominence&key=fake_key',
+  uri: 'https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=37.4229181%2C-122.0854212&radius=10&language=en&rankby=prominence&key=fake_key',
   body: '{"results" : [{"name": "Google", "place_id":"ABC123"}], "status" : "OK"}'
 });
 // fake the search -- by address example
 fakeweb.registerUri({
-  uri: 'https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=37.4229181%2C-122.0854212&rankby=prominence&radius=250&name=A&language=en&key=fake_key',
+  uri: 'https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=37.4229181%2C-122.0854212&rankby=prominence&radius=250&language=en&key=fake_key',
   body: '{"results" : [{"name": "Google", "place_id":"ABC123"}, {"name": "Gooey Cookie Factory", "place_id":"DEF456"}], "status" : "OK"}'
 });
 // fake the search -- no results
