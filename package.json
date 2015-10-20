@@ -12,11 +12,11 @@
     "url": "http://github.com/eastbayjake/google-locations.git"
   },
   "dependencies": {
-    "underscore": "^1.7.0"
+    "underscore": "1.7.0"
   },
   "devDependencies": {
-    "vows": "^0.8.0",
-    "node-fakeweb": "^0.0.17"
+    "vows": "0.8.0",
+    "node-fakeweb": "0.0.17"
   },
   "main": "./lib/google-locations.js"
 }
